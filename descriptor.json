@@ -1,0 +1,135 @@
+{
+    "id": "4422e8a9-36ca-4ce7-bca3-4f4fd075854e",
+    "name": "laim-title",
+    "description": "Генерация HTML-шапки отчёта о валидации ML-модели",
+    "fullDescription": "FOR MORE DETAILS VIEW README.md",
+    "moduleType": "unknown",
+    "uiResults": {},
+    "ports": [
+        {
+            "name": "development_report",
+            "label": "development_report",
+            "in": true,
+            "type": "default",
+            "shape": "shape_model",
+            "required": true,
+            "description": "pickle отчета о разработке",
+            "order": 1
+        },
+        {
+            "name": "hidden_port",
+            "label": "hidden_port",
+            "shape": "shape_model",
+            "in": false,
+            "type": "hidden",
+            "description": "",
+            "order": 2
+        }
+    ],
+    "portsMetadata": {
+        "hasDynamicInputPort": false,
+        "hasDynamicOutputPort": false
+    },
+    "script": {
+        "type": "python",
+        "deployType": "docker",
+        "baseImageKey": "py312-simple",
+        "runConfiguration": {
+            "libraryDependencies": [
+                "requirements.txt"
+            ],
+            "sourceFiles": [
+                "main.py"
+            ],
+            "functionName": "main",
+            "functionParameters": []
+        }
+    },
+    "ui": {
+        "settings": [
+            {
+                "page": "General",
+                "title": "General",
+                "components": [
+                    {
+                        "type": "form",
+                        "label": "title parameters",
+                        "config": {
+                            "components": [
+                                {
+                                    "parameter": "model_id",
+                                    "label": "ID модели",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "CI09840650"
+                                },
+                                {
+                                    "parameter": "model_version_id",
+                                    "label": "ID версии модели",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "351007"
+                                },
+                                {
+                                    "parameter": "model_version_name",
+                                    "label": "Название версии модели",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "Агент домена Вкладов d-01.005.00"
+                                },
+                                {
+                                    "parameter": "significance",
+                                    "label": "Степень значимости",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "C"
+                                },
+                                {
+                                    "parameter": "dev_block",
+                                    "label": "Блок разработчика",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "B2C"
+                                },
+                                {
+                                    "parameter": "owner_block",
+                                    "label": "Блок владельца",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "B2C"
+                                },
+                                {
+                                    "parameter": "validator",
+                                    "label": "Ответственный валидатор",
+                                    "uiComponent": "input",
+                                    "type": "string",
+                                    "defaultValue": "LAIM"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "result": {
+            "title": "Results",
+            "components": [
+                {
+                    "name": "$.hidden_port",
+                    "label": "",
+                    "parameter": "$.hidden_port",
+                    "uiComponent": "html",
+                    "type": "html",
+                    "config": {
+                        "datasets": [
+                            {
+                                "data": "$.hidden_port"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
+
